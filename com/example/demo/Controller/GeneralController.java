@@ -56,6 +56,13 @@ public class GeneralController {
     public Student getStudentById (@RequestParam Integer id){
         Student student=studentService.getStudentById(id);
         return student;
+
+    }
+    @RequestMapping(value = "student/getStudentBySchoolName", method = RequestMethod.GET)
+    public List<Student> getStudentBySchoolName(@RequestParam String schoolName) {
+
+        return studentService.getStudentBySchoolName(schoolName);
+
     }
 
     @RequestMapping(value = "course/getAll",method = RequestMethod.GET)
