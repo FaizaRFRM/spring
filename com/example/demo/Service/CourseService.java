@@ -19,5 +19,15 @@ public class CourseService {
     public Course getCourseById(Integer id){
         Course course = courseRepository.getCourseById(id);
         return course;
+
     }
+    public List<Course> getAllCourseByIsActive(){
+
+        return courseRepository.getAllCourseByIsActive();
+    }
+    public List<Course> getAllCourseByInActive(){
+
+        return courseRepository.getAllCourseByInActive();
+    }
+
 }

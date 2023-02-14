@@ -15,4 +15,8 @@ public interface CourseRepository extends CrudRepository<Course,Integer> {
     List<Course> getAllCourses();
     @Query(value = "SELECT s from Course s where s.id= :courseId")
     Course getCourseById(@Param("courseId")Integer id);
+    @Query(value = "SELECT s from Course s where s.IsActive = true")
+    List<Course> getAllCourseByIsActive();
+    @Query(value = "SELECT s from Course s where s.IsActive = false")
+    List<Course> getAllCourseByInActive();
 }

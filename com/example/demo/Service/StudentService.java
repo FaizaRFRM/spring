@@ -36,6 +36,15 @@ public class StudentService {
         return studentList;
     }
 
+    public List<Student> getAllActiveStudents(){
+
+        return studentRepository.getAllActiveStudents();
+    }
+    public List<Student> getAllInActiveStudents(){
+
+        return studentRepository.getAllInActiveStudents();
+    }
+
 //        public void addStudent() {
 //            Student student = new Student();
 //            student.setName("Faiza Thani");

@@ -22,4 +22,12 @@ public class MarkService {
         Mark mark = markRepository.getMarkById(id);
         return mark;
     }
+    public List<Mark> getAllMarkByIsActive(){
+
+        return markRepository.getAllMarkByIsActive();
+    }
+    public List<Mark> getAllInActiveMarks(){
+
+        return markRepository.getAllInActiveMarks();
+    }
 }

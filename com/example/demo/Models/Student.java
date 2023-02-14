@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 
-public class Student {
+public class Student extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
