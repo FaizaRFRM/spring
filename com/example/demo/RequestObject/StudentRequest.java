@@ -21,7 +21,6 @@ public class StudentRequest {
             this.name = name;
         }
 
-
         public String getDate() {
             return date;
         }

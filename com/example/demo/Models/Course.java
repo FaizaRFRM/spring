@@ -9,6 +9,7 @@ public class Course extends BaseEntity{
     Integer id;
     String name;
 //
+
     @ManyToOne
     @JoinColumn(name="Student_id",referencedColumnName = "id")
     Student student;

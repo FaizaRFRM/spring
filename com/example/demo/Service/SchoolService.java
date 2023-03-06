@@ -116,7 +116,6 @@ public class SchoolService {
         Date UpdateDate = formatter.parse(date);
         return schoolRepository.DeleteSchoolsByUpdatedDate(UpdateDate);
 
-
     }
 
 

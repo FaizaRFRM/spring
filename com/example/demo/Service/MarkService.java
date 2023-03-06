@@ -96,6 +96,7 @@ public class MarkService {
 
     }
 
+
     public <List> Mark DeleteMarksByUpdatedDate(String date) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date UpdateDate = formatter.parse(date);

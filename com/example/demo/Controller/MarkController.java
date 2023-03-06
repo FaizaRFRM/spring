@@ -25,6 +25,7 @@ public class MarkController {
         return marks;
     }
 
+
     @RequestMapping(value = "mark/getById",method = RequestMethod.GET)
 
     public Mark getMarkById (@RequestParam Integer id){

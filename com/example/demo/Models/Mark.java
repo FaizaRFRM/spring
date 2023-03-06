@@ -11,6 +11,7 @@ public class Mark extends BaseEntity{
     Integer id;
     Integer obtaindMarks;
     String grade;
+
     @ManyToOne
     @JoinColumn(name="course_id",referencedColumnName = "id")
     Course course;

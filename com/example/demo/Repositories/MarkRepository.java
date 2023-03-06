@@ -33,6 +33,7 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     @Query(value ="SELECT s from Mark s where s.updateDate = :date")
     <List>Mark getMarkByUpdatedDate(@Param("date") Date date);
     @Query(value = "Update  Mark s set s.isActive=false where s.id=:id")
+
     Mark deletMarkById(@Param("id") Integer id);
     @Query(value = "Update Mark s set s.IsActive = false")
     List<Mark> deletAllMark();

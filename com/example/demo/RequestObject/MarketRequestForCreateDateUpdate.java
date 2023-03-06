@@ -12,6 +12,7 @@ public class MarketRequestForCreateDateUpdate {
     String date;
     Integer id;
 
+
     public String getDate() {
         return date;
     }

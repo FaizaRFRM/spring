@@ -100,6 +100,7 @@ public class CourseService {
 
     }
 
+
     public <List> Course DeleteCoursesByUpdatedDate(String date) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date UpdateDate = formatter.parse(date);

@@ -12,6 +12,7 @@ public class Student extends BaseEntity{
     String name;
     String rollNumber;
 
+
     public School getSchool() {
         return school;
     }

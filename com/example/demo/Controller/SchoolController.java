@@ -36,6 +36,7 @@ public class SchoolController {
         return school;
     }
 
+
     @RequestMapping(value = "/getByName", method = RequestMethod.GET)
 
     public School getSchoolByName(@RequestParam String name) {

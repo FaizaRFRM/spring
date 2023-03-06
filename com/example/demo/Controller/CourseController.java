@@ -93,6 +93,7 @@ public class CourseController {
 
     }
 
+
     @RequestMapping(value = "DeleteCoursesByCreatedDate", method = RequestMethod.POST)
     public <List>Course DeleteCoursesByCreatedDate(@RequestParam String date) throws ParseException {
         Course course =courseService.DeleteCoursesByCreatedDate(date);

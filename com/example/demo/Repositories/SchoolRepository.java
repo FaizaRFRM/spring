@@ -41,6 +41,7 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     @Query(value = "Update  School s set s.isActive=false where s.id=:id")
     School deletSchoolById(@Param("id") Integer id);
     @Query(value = "Update School s set s.IsActive = false")
+
     List<School> deletAllSchool();
     @Query(value = "update School  s set s.isActive=false where s.name= :schoolName")
     School deletSchoolByName(@Param("SchoolName") String name);

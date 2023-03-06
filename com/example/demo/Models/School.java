@@ -13,6 +13,7 @@ public class School  extends BaseEntity{
 //    @JoinColumn(referencedColumnName = "id")
 //    List<Student> students;
 
+
     public Integer getId() {
         return id;
     }
