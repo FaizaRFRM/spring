@@ -2,13 +2,13 @@ package com.example.demo.Controller;
 
 import com.example.demo.Models.Course;
 import com.example.demo.Models.School;
+import com.example.demo.RequestObject.CourseRequest;
+import com.example.demo.RequestObject.MarketRequestForCreateDateUpdate;
 import com.example.demo.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,4 +41,78 @@ public class CourseController {
         List<Course>  InactiveCoursesList = courseService.getAllCourseByInActive();
         return InactiveCoursesList;
     }
+    @RequestMapping(value = "findTopByOrderById", method = RequestMethod.GET)
+    public Course findTopByOrderById() {
+        Course course = courseService.findTopByOrderById();
+        return course;
+    }
+
+    @RequestMapping(value = "FindBottomByOrderById", method = RequestMethod.GET)
+    public Course FindBottomByOrderById() {
+        Course course = courseService.FindBottomByOrderById();
+        return course;
+    }
+    @RequestMapping(value = "getCourseCreatedAfterDate", method = RequestMethod.GET)
+    public <List>Course getCourseCreatedAfterDate(@RequestParam String date) throws ParseException {
+        Course course =courseService.getCourseCreatedAfterDate(date);
+        return course;
+
+    }
+    @RequestMapping(value = "getCourseByCreatedDate", method = RequestMethod.GET)
+    public <List>Course getCourseByCreatedDate(@RequestParam String date) throws ParseException {
+        Course course =courseService.getCourseByCreatedDate(date);
+        return course;
+
+    }
+    @RequestMapping(value = "getCourseByUpdatedDate", method = RequestMethod.GET)
+    public <List>Course getCourseByUpdatedDate(@RequestParam String date) throws ParseException {
+        Course course =courseService.getCourseByUpdatedDate(date);
+        return course;
+
+    }
+    @RequestMapping(value = "deletCourseById", method = RequestMethod.POST)
+    public void deletCourseById(@RequestParam Integer id) throws ParseException {
+        courseService.deletCourseById(id);
+    }
+    @RequestMapping(value = "deletAllCourse", method = RequestMethod.POST)
+    public void deletAllCourse() {
+        courseService.deletAllCourse();
+    }
+
+
+
+    @RequestMapping(value = "deletCourseByName", method = RequestMethod.POST)
+    public Course deletCourseByName(@RequestParam String CourseName) {
+        Course course = courseService.deletCourseByName(CourseName);
+        return course;
+    }
+    @RequestMapping(value = "DeleteAllCoursesCreatedAfterDate", method = RequestMethod.GET)
+    public <List> Course DeleteAllCoursesCreatedAfterDate(@RequestParam String date) throws ParseException {
+        Course course = courseService.DeleteAllCoursesCreatedAfterDate(date);
+        return course;
+
+    }
+
+    @RequestMapping(value = "DeleteCoursesByCreatedDate", method = RequestMethod.POST)
+    public <List>Course DeleteCoursesByCreatedDate(@RequestParam String date) throws ParseException {
+        Course course =courseService.DeleteCoursesByCreatedDate(date);
+        return course;
+
+    }
+    @RequestMapping(value = "DeleteCoursesByUpdatedDate", method = RequestMethod.POST)
+    public <List>Course DeleteCoursesByUpdatedDate(@RequestParam String date) throws ParseException {
+        Course course =courseService.DeleteCoursesByUpdatedDate(date);
+        return course;
+
+    }
+
+
 }
+
+
+
+//getCourseByStudentId
+//getAllActiveCoursesForAStudent
+//getAllActiveCourses
+//createCourse
+//updateCourse

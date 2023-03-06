@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -19,4 +20,27 @@ public interface CourseRepository extends CrudRepository<Course,Integer> {
     List<Course> getAllCourseByIsActive();
     @Query(value = "SELECT s from Course s where s.IsActive = false")
     List<Course> getAllCourseByInActive();
+    @Query(value ="SELECT s from Course s where s.id=(SELECT max(s.id) from Course s)")
+    Course findTopByOrderById();
+    @Query(value ="SELECT s from Course s where s.updateDate =(SELECT max(s.updateDate) from Course s)")
+    Course FindBottomByOrderById();
+    @Query(value ="SELECT s from Course s where s.createDate >= :date")
+    <List>Course getCourseCreatedAfterDate(@Param("date") Date date);
+    @Query(value ="SELECT s from Course s where s.createDate = :date")
+    <List>Course getCourseByCreatedDate(@Param("date") Date date);
+    @Query(value ="SELECT s from Course s where s.updateDate = :date")
+    <List>Course getCourseByUpdatedDate(@Param("date") Date date);
+    @Query(value = "Update  Course s set s.isActive=false where s.id=:id")
+    Course deletCourseById(@Param("id") Integer id);
+    @Query(value = "Update Course s set s.IsActive = false")
+    List<Course> deletAllCourse();
+    @Query(value = "update Course  s set s.isActive=false where s.name= :courseName")
+    Course deletCourseByName(@Param("courseName") String name);
+    @Query(value ="update Course s set s.isActive=false where s.id >= :date")
+    <List>Course DeleteAllCoursesCreatedAfterDate(@Param("date") Date date);
+
+    @Query(value ="update Course s from Course s where s.createDate = :date")
+    <List>Course DeleteCoursesByCreatedDate(@Param("date") Date date);
+    @Query(value ="update Course s from Course s where s.createDate = :date")
+    <List>Course DeleteCoursesByUpdatedDate(@Param("date") Date date);
 }

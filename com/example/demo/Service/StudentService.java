@@ -8,6 +8,10 @@ import com.example.demo.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,18 +49,98 @@ public class StudentService {
         return studentRepository.getAllInActiveStudents();
     }
 
-//        public void addStudent() {
-//            Student student = new Student();
-//            student.setName("Faiza Thani");
-//            student.setRollNumber("1");
-//            studentRepository.save(student);
-//
-//        }
+    public Student findTopByOrderById() {
+        Student student = studentRepository.findTopByOrderById();
+        return student;
 
-//        public void deleteStudentById(Integer id){
-//            Student studentToDelete = studentRepository.findById(id).get();
-//            studentRepository.delete(studentToDelete);
-//        }
+    }
+
+    public Student FindBottomByOrderById() {
+        Student student = studentRepository.FindBottomByOrderById();
+        return student;
+
+    }
+
+    public <List> Student getStudentCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = formatter.parse(date);
+        return studentRepository.getStudentCreatedAfterDate(date1);
+
+
+    }
+
+    public <List> Student getStudentByCreatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date CreateDate = formatter.parse(date);
+        return studentRepository.getStudentByCreatedDate(CreateDate);
+
+
+    }
+
+    public <List> Student getStudentByUpdatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date UpdateDate = formatter.parse(date);
+        return studentRepository.getStudentByUpdatedDate(UpdateDate);
+
+
+    }
+
+    public void deletStudentById(Integer id) throws ParseException {
+        Student student = studentRepository.deletStudentById(id);
+        student.setActive(true);
+        studentRepository.save(student);
+    }
+
+    public void deletAllStudent() {
+        Student student = (Student) studentRepository.deletAllStudent();
+        student.setActive(true);
+        studentRepository.save(student);
+    }
+
+    public <List> Student DeleteAllStudentsCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date Date1 = formatter.parse(date);
+        return studentRepository.DeleteAllStudentsCreatedAfterDate(Date1);
+    }
+
+    public Student deletStudentByName(String studentName) {
+        Student student = studentRepository.deletStudentByName(studentName);
+        return student;
+    }
+
+    public <List> Student DeleteStudentsByCreatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date CreateDate = formatter.parse(date);
+        return studentRepository.DeleteStudentsByCreatedDate(CreateDate);
+
+
+    }
+
+    public <List> Student DeleteStudentsByUpdatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date UpdateDate = formatter.parse(date);
+        return studentRepository.DeleteStudentsByUpdatedDate(UpdateDate);
+
+
+    }
+    public List<School> getSchoolByNumberOfStudent(Integer numberOfStudent =4) {
+        List<Integer> typesOfSchoolIdsInStudent = studentRepository.getDistinctSchoolIdsFromStudent();
+        //{1,2 }
+
+        Integer schoolIdThatUserWants = 0;
+
+        for (Integer idOfSchool : typesOfSchoolIdsInStudent) {
+            Integer count = studentRepository.getCountOfStudentsBySchoolId(idOfSchool);
+
+            if (numberOfStudent == count) {
+                schoolIdThatUserWants = idOfSchool;
+                break;
+            }
+        }
+
+        School schoolThatUserWasLookingFor = schoolRepository.getSchoolById(schoolIdThatUserWants);
+    }
+
     }
 
 

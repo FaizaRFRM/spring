@@ -2,13 +2,13 @@ package com.example.demo.Controller;
 
 import com.example.demo.Models.School;
 import com.example.demo.Models.Student;
+import com.example.demo.RequestObject.MarketRequestForCreateDateUpdate;
+import com.example.demo.RequestObject.StudentRequest;
 import com.example.demo.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,4 +47,77 @@ public class StudentController {
         List<Student>  InactiveStudentsList = studentService.getAllInActiveStudents();
         return InactiveStudentsList;
     }
+    @RequestMapping(value = "findTopByOrderById", method = RequestMethod.GET)
+    public Student findTopByOrderById() {
+        Student student = studentService.findTopByOrderById();
+        return student;
+    }
+
+    @RequestMapping(value = "FindBottomByOrderById", method = RequestMethod.GET)
+    public Student FindBottomByOrderById() {
+        Student student = studentService.FindBottomByOrderById();
+        return student;
+    }
+    @RequestMapping(value = "getStudentCreatedAfterDate", method = RequestMethod.GET)
+    public <List>Student getStudentCreatedAfterDate(@RequestParam String date) throws ParseException {
+        Student student =studentService.getStudentCreatedAfterDate(date);
+        return student;
+
+    }
+    @RequestMapping(value = "getStudentByCreatedDate", method = RequestMethod.GET)
+    public <List>Student getStudentByCreatedDate(@RequestParam String date) throws ParseException {
+        Student student =studentService.getStudentByCreatedDate(date);
+        return student;
+
+    }
+    @RequestMapping(value = "getStudentByUpdatedDate", method = RequestMethod.GET)
+    public <List>Student getStudentByUpdatedDate(@RequestParam String date) throws ParseException {
+        Student student =studentService.getStudentByUpdatedDate(date);
+        return student;
+
+    }
+    @RequestMapping(value = "deletStudentById", method = RequestMethod.POST)
+    public void deletStudentById(@RequestParam Integer id) throws ParseException {
+        studentService.deletStudentById(id);
+    }
+    @RequestMapping(value = "deletAllStudent", method = RequestMethod.POST)
+    public void deletAllStudent() {
+        studentService.deletAllStudent();
+    }
+
+
+
+    @RequestMapping(value = "deletStudentByName", method = RequestMethod.POST)
+    public Student deletStudentByName(@RequestParam String StudentName) {
+        Student student = studentService.deletStudentByName(StudentName);
+        return student;
+    }
+    @RequestMapping(value = "DeleteAllStudentsCreatedAfterDate", method = RequestMethod.GET)
+    public <List> Student DeleteAllStudentsCreatedAfterDate(@RequestParam String date) throws ParseException {
+        Student student = studentService.DeleteAllStudentsCreatedAfterDate(date);
+        return student;
+
+    }
+
+    @RequestMapping(value = "DeleteStudentsByCreatedDate", method = RequestMethod.POST)
+    public <List>Student DeleteStudentsByCreatedDate(@RequestParam String date) throws ParseException {
+        Student student =studentService.DeleteStudentsByCreatedDate(date);
+        return student;
+
+    }
+    @RequestMapping(value = "DeleteStudentsByUpdatedDate", method = RequestMethod.POST)
+    public <List>Student DeleteStudentsByUpdatedDate(@RequestParam String date) throws ParseException {
+        Student student =studentService.DeleteStudentsByUpdatedDate(date);
+        return student;
+
+    }
+
 }
+
+
+//getByStudentByRollNumber
+//getStudentsBySchoolId
+//deleteByStudentByRollNumber
+//deleteStudentsBySchoolId
+//createStudent
+//updateStudent
