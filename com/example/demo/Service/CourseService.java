@@ -108,5 +108,20 @@ public class CourseService {
 
 
     }
+    public void createCourse() {
+        Course course = new Course();
+        course.setName("ABC Course");
+        courseRepository.save(course);
+    }
+    public void updateCourse(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyy-MM-dd");
+        Date javaDate = formatter.parse(date);
+        Course course = courseRepository.getCourseById(id);
+        course.setCreatedDate(javaDate);
+        course.setName("ABC Course");
+        courseRepository.save(course);
+
+    }
 
 }

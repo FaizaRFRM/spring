@@ -113,7 +113,6 @@ public class StudentService {
         Date CreateDate = formatter.parse(date);
         return studentRepository.DeleteStudentsByCreatedDate(CreateDate);
 
-
     }
 
     public <List> Student DeleteStudentsByUpdatedDate(String date) throws ParseException {
@@ -123,23 +122,28 @@ public class StudentService {
 
 
     }
-    public List<School> getSchoolByNumberOfStudent(Integer numberOfStudent =4) {
-        List<Integer> typesOfSchoolIdsInStudent = studentRepository.getDistinctSchoolIdsFromStudent();
-        //{1,2 }
-
-        Integer schoolIdThatUserWants = 0;
-
-        for (Integer idOfSchool : typesOfSchoolIdsInStudent) {
-            Integer count = studentRepository.getCountOfStudentsBySchoolId(idOfSchool);
-
-            if (numberOfStudent == count) {
-                schoolIdThatUserWants = idOfSchool;
-                break;
-            }
-        }
-        School schoolThatUserWasLookingFor = schoolRepository.getSchoolById(schoolIdThatUserWants);
+    public <List>Student setDeleteByStudentByRollNumber(String rollNumber)throws ParseException{
+        return studentRepository.setDeleteByStudentByRollNumber(rollNumber) ;
     }
+    public<List> Student getByStudentByRollNumber(String rollNumber)throws ParseException{
+        return studentRepository.getByStudentByRollNumber(rollNumber);
 
+    }
+    public void createStudent() {
+        Student student = new Student();
+        student.setName("ABC Student");
+        studentRepository.save(student);
+    }
+    public void updateStudent(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyy-MM-dd");
+        Date javaDate = formatter.parse(date);
+        Student student = studentRepository.getStudentById(id);
+        student.setCreatedDate(javaDate);
+        student.setName("ABC Student");
+        studentRepository.save(student);
+
+    }
     }
 
 

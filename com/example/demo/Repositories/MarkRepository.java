@@ -44,4 +44,6 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     <List>Mark DeleteMarksByCreatedDate(@Param("date") Date date);
     @Query(value ="update School s from Mark s where s.createDate = :date")
     <List>Mark DeleteMarksByUpdatedDate(@Param("date") Date date);
+    @Query(value = "SELECT s from Mark s where s.grade=:gradeMark")
+    Mark getMarkByGrade(@Param("gradeMark") Integer grade);
 }

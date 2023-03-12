@@ -100,13 +100,26 @@ public class MarkController {
         return mark;
 
     }
+    @RequestMapping(value = "createMark", method = RequestMethod.POST)
+    public Integer createMark() {
+        markService.createMark();
+        return (123);
+    }
+
+    @RequestMapping(value = "updateMark")
+    public void updateMark(@RequestBody MarkRequest data)throws ParseException {
+        markService.updateMark(data.getDate(),data.getId());
+    }
+    @RequestMapping(value = "/getByGrade", method = RequestMethod.GET)
+
+    public Mark getMarkByGrade(@RequestParam Integer grade) {
+        Mark mark = markService.getMarkByGrade(grade);
+        return mark;
+    }
+
 }
 
-//getAllByGrade
 //getByObtainedMarksMoreThan
 //getByObtainedMarksLessThan
 //getMarksByCourseId
 //deleteMarksByCourseId
-
-//createMarks
-//updateMarks

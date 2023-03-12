@@ -30,13 +30,13 @@ public interface CourseRepository extends CrudRepository<Course,Integer> {
     <List>Course getCourseByCreatedDate(@Param("date") Date date);
     @Query(value ="SELECT s from Course s where s.updateDate = :date")
     <List>Course getCourseByUpdatedDate(@Param("date") Date date);
-    @Query(value = "Update  Course s set s.isActive=false where s.id=:id")
+    @Query(value = "Update  Course s set s.IsActive=false where s.id=:id")
     Course deletCourseById(@Param("id") Integer id);
     @Query(value = "Update Course s set s.IsActive = false")
     List<Course> deletAllCourse();
-    @Query(value = "update Course  s set s.isActive=false where s.name= :courseName")
-    Course deletCourseByName(@Param("courseName") String name);
-    @Query(value ="update Course s set s.isActive=false where s.id >= :date")
+    @Query(value = "update Course  s set s.IsActive=false where s.name= :courseName")
+    Course deletCourseByName(@Param("courseName") String courseName);
+    @Query(value ="update Course s set s.IsActive=false where s.id >= :date")
     <List>Course DeleteAllCoursesCreatedAfterDate(@Param("date") Date date);
 
 

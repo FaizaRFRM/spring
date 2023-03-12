@@ -106,14 +106,19 @@ public class CourseController {
         return course;
 
     }
+    @RequestMapping(value = "createCourse", method = RequestMethod.POST)
+    public String createCourse() {
+        courseService.createCourse();
+        return "Course add successful";
+    }
 
-
+    @RequestMapping(value = "updateCourse")
+    public void updateCourse(@RequestBody CourseRequest data)throws ParseException {
+        courseService.updateCourse(data.getDate(),data.getId());
+    }
 }
 
 
 
 //getCourseByStudentId
 //getAllActiveCoursesForAStudent
-//getAllActiveCourses
-//createCourse
-//updateCourse

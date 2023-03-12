@@ -121,16 +121,18 @@ public class SchoolController {
         return school;
 
     }
-    @RequestMapping(value = "getSchoolByNumberOfStudent", method = RequestMethod.POST)
-    public List<School> getSchoolByNumberOfStudent(@RequestParam Integer numberOfStudent) {
-        List<School> schoolList = new ArrayList<>();
-        return schoolList;
+    @RequestMapping(value = "getSchoolByNumberOfStudents",method = RequestMethod.GET)
+    public List<School> getSchoolByNumberOfStudents(@RequestParam Integer numberOfStudents){
+        return schoolService.getSchoolByNumberOfStudents(numberOfStudents);
+    }
+    @RequestMapping(value = "createSchool", method = RequestMethod.POST)
+    public String createSchool() {
+        schoolService.createSchool();
+        return "School add successful";
     }
 
-
+    @RequestMapping(value = "updateSchool")
+    public void updateSchool(@RequestBody MarketRequestForCreateDateUpdate data)throws ParseException {
+        schoolService.updateSchool(data.getDate(),data.getId());
+    }
 }
-
-
-//getSchoolByNumberOfStudents
-//createSchool
-//updateSchool

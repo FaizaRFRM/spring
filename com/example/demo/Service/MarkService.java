@@ -104,4 +104,23 @@ public class MarkService {
 
 
     }
+    public void createMark() {
+        Mark mark = new Mark();
+        mark.setObtaindMarks(123);
+        markRepository.save(mark);
+    }
+    public void updateMark(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyy-MM-dd");
+        Date javaDate = formatter.parse(date);
+        Mark mark = markRepository.getMarkById(id);
+        mark.setCreatedDate(javaDate);
+        mark.setObtaindMarks(123);
+        markRepository.save(mark);
+
+    }
+    public Mark getMarkByGrade(Integer grade) {
+        Mark mark = markRepository.getMarkByGrade(grade);
+        return mark;
+    }
 }

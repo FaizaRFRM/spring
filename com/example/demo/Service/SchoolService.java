@@ -1,12 +1,15 @@
 package com.example.demo.Service;
-import com.coding.codeline.course.Repositories.StudentRepository;
+//import com.coding.codeline.course.Repositories.StudentRepository;
 
 import com.example.demo.Models.School;
 import com.example.demo.Repositories.SchoolRepository;
+import com.example.demo.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.HashMap;
+
+import java.util.ArrayList;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -117,6 +120,38 @@ public class SchoolService {
         return schoolRepository.DeleteSchoolsByUpdatedDate(UpdateDate);
 
     }
+    public List<School> getSchoolByNumberOfStudents(Integer numberOfStudents){
+        List<Integer> schoolIds = studentRepository.getUniqueSchoolIdsFromStudents();
+        HashMap<Integer, Integer> idCountMap = new HashMap<>();
+        List<School> listOfSchoolByNumberOfStudent = new ArrayList<>();
 
+        for (Integer id: schoolIds) {
+            idCountMap.put(id, studentRepository.getCountOfStudentBySchoolId(id));
+        }
+
+        for (Integer id: idCountMap.keySet()) {
+            if(idCountMap.get(id) == numberOfStudents){
+                listOfSchoolByNumberOfStudent.add(schoolRepository.getSchoolById(id));
+            }
+        }
+
+        return listOfSchoolByNumberOfStudent;
+
+    }
+    public void createSchool() {
+        School school = new School();
+        school.setName("ABC School");
+        schoolRepository.save(school);
+    }
+    public void updateSchool(String date, Integer id) throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyy-MM-dd");
+        Date javaDate = formatter.parse(date);
+        School school = schoolRepository.getSchoolById(id);
+        school.setCreatedDate(javaDate);
+        school.setName("ABC School");
+        schoolRepository.save(school);
+
+    }
 
 }

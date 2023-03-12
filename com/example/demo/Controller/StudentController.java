@@ -112,13 +112,31 @@ public class StudentController {
         return student;
 
     }
+    @RequestMapping(value = "setDeleteByStudentByRollNumber",method = RequestMethod.POST)
+    public <List>Student setDeleteByStudentByRollNumber(@RequestParam String rollNumber) throws ParseException{
+        Student student =studentService.setDeleteByStudentByRollNumber(rollNumber);
+        return student;
+    }
+
+    @RequestMapping(value = "getByStudentByRollNumber",method=RequestMethod.GET)
+    public <List>Student getByStudentByRollNumber(@RequestParam String rollNumber) throws ParseException{
+        Student student=studentService.getByStudentByRollNumber(rollNumber);
+        return student;
+    }
+    @RequestMapping(value = "createStudent", method = RequestMethod.POST)
+    public String createStudent() {
+        studentService.createStudent();
+        return "Student add successful";
+    }
+
+    @RequestMapping(value = "updateStudent")
+    public void updateStudent(@RequestBody StudentRequest data)throws ParseException {
+        studentService.updateStudent(data.getDate(),data.getId());
+    }
+
 
 }
 
 
-//getByStudentByRollNumber
 //getStudentsBySchoolId
-//deleteByStudentByRollNumber
 //deleteStudentsBySchoolId
-//createStudent
-//updateStudent

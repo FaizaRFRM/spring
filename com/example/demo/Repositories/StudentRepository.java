@@ -54,8 +54,15 @@ public interface StudentRepository extends CrudRepository<Student,Integer> {
         @Query(value = "SELECT DISTINCT school_id FROM student", nativeQuery = true)
         List<Integer> getDistinctSchoolIdsFromStudent();
 
-
-        @Query(value = "SELECT COUNT(id) From student where school_id = :?1", nativeQuery = true)
+        @Query(value = "SELECT COUNT(id) From student where school_id = ?1", nativeQuery = true)
         Integer getCountOfStudentsBySchoolId(Integer schoolId);
 
+        @Query(value = "select DISTINCT school_id from student ",nativeQuery = true)
+        List<Integer> getUniqueSchoolIdsFromStudents();
+        @Query(value = "Select count(id) from student where id =?1", nativeQuery = true)
+        Integer getCountOfStudentBySchoolId(Integer schoolId);
+        @Query(value = "update Student  s set s.isActive=false where s.rollNumber= :rollNumber")
+        Student setDeleteByStudentByRollNumber(@Param("rollNumber") String rollNumber);
+        @Query(value = "SELECT s From Student s WHERE s.rollNumber = :rollNumber")
+        Student getByStudentByRollNumber(@Param("rollNumber") String rollNumber);
 }
