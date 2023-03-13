@@ -33,13 +33,6 @@ public class StudentService {
     }
 
 
-    public List<Student> getStudentBySchoolName(String schoolName){
-        School school = schoolRepository.getSchoolByName(schoolName);
-        Integer schoolId = school.getId();
-        List<Student> studentList = studentRepository.getStudentBySchoolId(schoolId);
-        return studentList;
-    }
-
     public List<Student> getAllActiveStudents(){
 
         return studentRepository.getAllActiveStudents();
@@ -66,6 +59,19 @@ public class StudentService {
         Date date1 = formatter.parse(date);
         return studentRepository.getStudentCreatedAfterDate(date1);
 
+
+    }
+    public Student getStudentBySchoolName(String studentName)throws ParseException{
+        Student student=studentRepository.getStudentBySchoolName(studentName);
+        return student;
+
+    }
+    public<List> Student getByStudentByRollNumber(String rollNumber)throws ParseException{
+        return studentRepository.getByStudentByRollNumber(rollNumber);
+
+    }
+    public<List> Student getStudentsBySchoolId(Integer id)throws ParseException{
+        return studentRepository.getStudentsBySchoolId(id);
 
     }
 
@@ -107,7 +113,12 @@ public class StudentService {
         Student student = studentRepository.deletStudentByName(studentName);
         return student;
     }
-
+    public <List>Student setDeleteByStudentByRollNumber(String rollNumber)throws ParseException{
+        return studentRepository.setDeleteByStudentByRollNumber(rollNumber) ;
+    }
+    public <List>Student setDeleteStudentsBySchoolId(Integer id)throws ParseException{
+        return studentRepository.setDeleteStudentsBySchoolId(id) ;
+    }
     public <List> Student DeleteStudentsByCreatedDate(String date) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date CreateDate = formatter.parse(date);
@@ -119,16 +130,9 @@ public class StudentService {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date UpdateDate = formatter.parse(date);
         return studentRepository.DeleteStudentsByUpdatedDate(UpdateDate);
+    }
 
 
-    }
-    public <List>Student setDeleteByStudentByRollNumber(String rollNumber)throws ParseException{
-        return studentRepository.setDeleteByStudentByRollNumber(rollNumber) ;
-    }
-    public<List> Student getByStudentByRollNumber(String rollNumber)throws ParseException{
-        return studentRepository.getByStudentByRollNumber(rollNumber);
-
-    }
     public void createStudent() {
         Student student = new Student();
         student.setName("ABC Student");

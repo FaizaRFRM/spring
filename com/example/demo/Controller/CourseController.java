@@ -81,9 +81,9 @@ public class CourseController {
 
 
 
-    @RequestMapping(value = "deletCourseByName", method = RequestMethod.POST)
-    public Course deletCourseByName(@RequestParam String CourseName) {
-        Course course = courseService.deletCourseByName(CourseName);
+    @RequestMapping(value = "deleteCourseByName", method = RequestMethod.POST)
+    public Course deleteCourseByName(@RequestParam String CourseName) {
+        Course course = courseService.deleteCourseByName(CourseName);
         return course;
     }
     @RequestMapping(value = "DeleteAllCoursesCreatedAfterDate", method = RequestMethod.GET)

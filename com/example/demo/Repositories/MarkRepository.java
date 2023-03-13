@@ -24,25 +24,25 @@ public interface MarkRepository extends CrudRepository<Mark,Integer> {
     List<Mark> getAllInActiveMarks();
     @Query(value ="SELECT s from Mark s where s.id=(SELECT max(s.id) from Mark s)")
     Mark findTopByOrderById();
-    @Query(value ="SELECT s from Mark s where s.updateDate =(SELECT max(s.updateDate) from Mark s)")
+    @Query(value ="SELECT s from Mark s where s.updatedDate =(SELECT max(s.updatedDate) from Mark s)")
     Mark FindBottomByOrderById();
-    @Query(value ="SELECT s from Mark s where s.createDate >= :date")
+    @Query(value ="SELECT s from Mark s where s.createdDate >= :date")
     <List>Mark getMarkCreatedAfterDate(@Param("date") Date date);
-    @Query(value ="SELECT s from Mark s where s.createDate = :date")
+    @Query(value ="SELECT s from Mark s where s.createdDate = :date")
     <List>Mark getMarkByCreatedDate(@Param("date") Date date);
-    @Query(value ="SELECT s from Mark s where s.updateDate = :date")
+    @Query(value ="SELECT s from Mark s where s.updatedDate = :date")
     <List>Mark getMarkByUpdatedDate(@Param("date") Date date);
-    @Query(value = "Update  Mark s set s.isActive=false where s.id=:id")
+    @Query(value = "Update  Mark s set s.IsActive=false where s.id=:id")
 
     Mark deletMarkById(@Param("id") Integer id);
     @Query(value = "Update Mark s set s.IsActive = false")
-    List<Mark> deletAllMark();
-    @Query(value ="update Mark s set s.isActive=false where s.id >= :date")
+    Mark deletAllMark();
+    @Query(value ="update Mark s set s.IsActive=false where s.id >= :date")
     <List>Mark DeleteAllMarksCreatedAfterDate(@Param("date") Date date);
 
-    @Query(value ="update Mark s from Mark s where s.createDate = :date")
+    @Query(value ="update Mark s set s.createdDate = :date")
     <List>Mark DeleteMarksByCreatedDate(@Param("date") Date date);
-    @Query(value ="update School s from Mark s where s.createDate = :date")
+    @Query(value ="update Mark s set s.updatedDate = :date")
     <List>Mark DeleteMarksByUpdatedDate(@Param("date") Date date);
     @Query(value = "SELECT s from Mark s where s.grade=:gradeMark")
     Mark getMarkByGrade(@Param("gradeMark") Integer grade);

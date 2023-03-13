@@ -32,11 +32,6 @@ public class StudentController {
         return student;
 
     }
-    @RequestMapping(value = "student/getStudentBySchoolName", method = RequestMethod.GET)
-    public List<Student> getStudentBySchoolName(@RequestParam String schoolName) {
-
-        return studentService.getStudentBySchoolName(schoolName);
-    }
 
     @RequestMapping(value = "getAllActiveStudents", method = RequestMethod.GET)
     public List<Student> getAllActiveStudents(){
@@ -65,6 +60,26 @@ public class StudentController {
         return student;
 
     }
+    @RequestMapping(value = "getStudentBySchoolName", method = RequestMethod.GET)
+    public Student getStudentBySchoolName(@RequestParam String FirstName) {
+        Student student = studentService.getStudentBySchoolName(FirstName);
+        return student;
+    }
+    @RequestMapping(value = "getByStudentByRollNumber",method=RequestMethod.GET)
+    public <List>Student getByStudentByRollNumber(@RequestParam String rollNumber) throws ParseException{
+        Student student=studentService.getByStudentByRollNumber(rollNumber);
+        return student;
+    }
+
+
+    @RequestMapping(value = "student/getStudentsBySchoolId", method = RequestMethod.GET)
+    public <List>Student getStudentsBySchoolId(@RequestParam Integer id) throws ParseException {
+        Student student=studentService.getStudentsBySchoolId(id);
+        return student;
+
+    }
+
+
     @RequestMapping(value = "getStudentByCreatedDate", method = RequestMethod.GET)
     public <List>Student getStudentByCreatedDate(@RequestParam String date) throws ParseException {
         Student student =studentService.getStudentByCreatedDate(date);
@@ -77,6 +92,11 @@ public class StudentController {
         return student;
 
     }
+
+
+
+
+
     @RequestMapping(value = "deletStudentById", method = RequestMethod.POST)
     public void deletStudentById(@RequestParam Integer id) throws ParseException {
         studentService.deletStudentById(id);
@@ -86,18 +106,27 @@ public class StudentController {
         studentService.deletAllStudent();
     }
 
+    @RequestMapping(value = "DeleteAllStudentsCreatedAfterDate", method = RequestMethod.GET)
+    public <List> Student DeleteAllStudentsCreatedAfterDate(@RequestParam String date) throws ParseException {
+        Student student = studentService.DeleteAllStudentsCreatedAfterDate(date);
+        return student;
 
+    }
 
     @RequestMapping(value = "deletStudentByName", method = RequestMethod.POST)
     public Student deletStudentByName(@RequestParam String StudentName) {
         Student student = studentService.deletStudentByName(StudentName);
         return student;
     }
-    @RequestMapping(value = "DeleteAllStudentsCreatedAfterDate", method = RequestMethod.GET)
-    public <List> Student DeleteAllStudentsCreatedAfterDate(@RequestParam String date) throws ParseException {
-        Student student = studentService.DeleteAllStudentsCreatedAfterDate(date);
+    @RequestMapping(value = "setDeleteByStudentByRollNumber",method = RequestMethod.POST)
+    public <List>Student setDeleteByStudentByRollNumber(@RequestParam String rollNumber) throws ParseException{
+        Student student =studentService.setDeleteByStudentByRollNumber(rollNumber);
         return student;
-
+    }
+    @RequestMapping(value = "setDeleteStudentsBySchoolId",method = RequestMethod.POST)
+    public <List>Student setDeleteStudentsBySchoolId(@RequestParam Integer id) throws ParseException{
+        Student student =studentService.setDeleteStudentsBySchoolId(id);
+        return student;
     }
 
     @RequestMapping(value = "DeleteStudentsByCreatedDate", method = RequestMethod.POST)
@@ -112,17 +141,9 @@ public class StudentController {
         return student;
 
     }
-    @RequestMapping(value = "setDeleteByStudentByRollNumber",method = RequestMethod.POST)
-    public <List>Student setDeleteByStudentByRollNumber(@RequestParam String rollNumber) throws ParseException{
-        Student student =studentService.setDeleteByStudentByRollNumber(rollNumber);
-        return student;
-    }
 
-    @RequestMapping(value = "getByStudentByRollNumber",method=RequestMethod.GET)
-    public <List>Student getByStudentByRollNumber(@RequestParam String rollNumber) throws ParseException{
-        Student student=studentService.getByStudentByRollNumber(rollNumber);
-        return student;
-    }
+
+
     @RequestMapping(value = "createStudent", method = RequestMethod.POST)
     public String createStudent() {
         studentService.createStudent();

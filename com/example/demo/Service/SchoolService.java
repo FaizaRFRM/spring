@@ -126,7 +126,7 @@ public class SchoolService {
         List<School> listOfSchoolByNumberOfStudent = new ArrayList<>();
 
         for (Integer id: schoolIds) {
-            idCountMap.put(id, studentRepository.getCountOfStudentBySchoolId(id));
+            idCountMap.put(id, studentRepository.getCountOfStudentsBySchoolId(id));
         }
 
         for (Integer id: idCountMap.keySet()) {

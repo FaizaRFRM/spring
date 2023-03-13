@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.Models.Course;
 import com.example.demo.Models.Mark;
 import com.example.demo.Models.School;
 import com.example.demo.Repositories.MarkRepository;
@@ -77,7 +78,7 @@ public class MarkService {
     }
 
     public void deletAllMark() {
-        Mark mark = (Mark) markRepository.deletAllMark();
+        Mark mark = markRepository.deletAllMark();
         mark.setActive(true);
         markRepository.save(mark);
     }

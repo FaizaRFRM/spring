@@ -69,17 +69,21 @@ public class CourseService {
 
     }
 
-    public void deletCourseById(Integer id) throws ParseException {
+    public void deletCourseById(Integer id) {
         Course course = courseRepository.deletCourseById(id);
         course.setActive(true);
         courseRepository.save(course);
     }
-
-    public void deletAllCourse() {
-        Course course = (Course) courseRepository.deletAllCourse();
+    public void deletAllCourse()  {
+        Course course = courseRepository.deletAllCourse();
         course.setActive(true);
         courseRepository.save(course);
     }
+//    public void deletAllCourse() {
+//        Course course = (Course) courseRepository.deletAllCourse();
+//        course.setActive(true);
+//        courseRepository.save(course);
+//    }
 
     public <List> Course DeleteAllCoursesCreatedAfterDate(String date) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -87,8 +91,8 @@ public class CourseService {
         return courseRepository.DeleteAllCoursesCreatedAfterDate(Date1);
     }
 
-    public Course deletCourseByName(String courseName) {
-        Course course = courseRepository.deletCourseByName(courseName);
+    public Course deleteCourseByName(String courseName) {
+        Course course = courseRepository.deleteCourseByName(courseName);
         return course;
     }
 

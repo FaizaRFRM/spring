@@ -17,11 +17,10 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
     List<School> getAllSchools();
 
     @Query(value = "SELECT s from School s where s.id=:SchoolId")
-    School getSchoolById(@Param("SchoolId") Integer id);
+    School getSchoolById(@Param("SchoolId") Integer SchoolId);
 
     @Query(value = "SELECT s from School s where s.name=:SchoolName")
-    School getSchoolByName(@Param("SchoolName") String name);
-
+    School getSchoolByName(@Param("SchoolName") String SchoolName);
 
     @Query(value = "SELECT s from School s where s.IsActive = true")
     List<School> getAllSchoolByIsActive();
@@ -30,27 +29,26 @@ public interface SchoolRepository extends CrudRepository<School,Integer> {
 
     @Query(value ="SELECT s from School s where s.id=(SELECT max(s.id) from School s)")
     School findTopByOrderById();
-    @Query(value ="SELECT s from School s where s.updateDate =(SELECT max(s.updateDate) from School s)")
+    @Query(value ="SELECT s from School s where s.updatedDate =(SELECT max(s.updatedDate) from School s)")
     School FindBottomByOrderById();
-    @Query(value ="SELECT s from School s where s.createDate >= :date")
+    @Query(value ="SELECT s from School s where s.createdDate >= :date")
     <List>School getSchoolCreatedAfterDate(@Param("date") Date date);
-    @Query(value ="SELECT s from School s where s.createDate = :date")
+    @Query(value ="SELECT s from School s where s.createdDate = :date")
     <List>School getSchoolByCreatedDate(@Param("date") Date date);
-    @Query(value ="SELECT s from School s where s.updateDate = :date")
+    @Query(value ="SELECT s from School s where s.updatedDate = :date")
     <List>School getSchoolByUpdatedDate(@Param("date") Date date);
-    @Query(value = "Update  School s set s.isActive=false where s.id=:id")
+    @Query(value = "Update  School s set s.IsActive=false where s.id=:id")
     School deletSchoolById(@Param("id") Integer id);
     @Query(value = "Update School s set s.IsActive = false")
-
     List<School> deletAllSchool();
-    @Query(value = "update School  s set s.isActive=false where s.name= :schoolName")
-    School deletSchoolByName(@Param("SchoolName") String name);
-    @Query(value ="update School s set s.isActive=false where s.id >= :date")
+    @Query(value = "update School s set s.IsActive=false where s.name= :SchoolName")
+    School deletSchoolByName(@Param("SchoolName") String SchoolName);
+    @Query(value ="update School s set s.IsActive=false where s.id >= :date")
     <List>School DeleteAllSchoolsCreatedAfterDate(@Param("date") Date date);
 
-    @Query(value ="update School s from School s where s.createDate = :date")
+    @Query(value ="update School s set s.IsActive=false where s.createdDate = :date")
     <List>School DeleteSchoolsByCreatedDate(@Param("date") Date date);
-    @Query(value ="update School s from School s where s.createDate = :date")
+    @Query(value ="update School s set s.IsActive=false where s.updatedDate = :date")
     <List>School DeleteSchoolsByUpdatedDate(@Param("date") Date date);
 
 

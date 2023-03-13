@@ -22,47 +22,32 @@ public class SchoolController {
     SchoolService schoolService;
 
     //    school Appi
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public List<School> getAllSchool() {
-        List<School> schools = new ArrayList<>();
-        schools = schoolService.getAllSchools();
-        return schools;
-    }
-
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
-
     public School getSchoolById(@RequestParam Integer id) {
         School school = schoolService.getSchoolById(id);
         return school;
     }
-
-
-    @RequestMapping(value = "/getByName", method = RequestMethod.GET)
-
-    public School getSchoolByName(@RequestParam String name) {
-        School school = schoolService.getSchoolByName(name);
-        return school;
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public List<School> getAllSchool() {
+        List<School> schools =schoolService.getAllSchools();
+        return schools;
     }
-
     @RequestMapping(value = "getAllSchoolByIsActive", method = RequestMethod.GET)
     public List<School> getAllSchoolByIsActive() {
         List<School> activeSchoolList = schoolService.getAllSchoolByIsActive();
         return activeSchoolList;
     }
-
     @RequestMapping(value = "getAllSchoolByInActive", method = RequestMethod.GET)
     public List<School> getAllSchoolByInActive() {
         List<School> InactiveSchoolsList = schoolService.getAllSchoolByInActive();
         return InactiveSchoolsList;
 
     }
-
     @RequestMapping(value = "findTopByOrderById", method = RequestMethod.GET)
     public School findTopByOrderById() {
         School school = schoolService.findTopByOrderById();
         return school;
     }
-
     @RequestMapping(value = "FindBottomByOrderById", method = RequestMethod.GET)
     public School FindBottomByOrderById() {
         School school = schoolService.FindBottomByOrderById();
@@ -72,20 +57,28 @@ public class SchoolController {
     public <List>School getSchoolCreatedAfterDate(@RequestParam String date) throws ParseException {
         School school =schoolService.getSchoolCreatedAfterDate(date);
         return school;
-
     }
+    @RequestMapping(value = "/getByName", method = RequestMethod.GET)
+    public School getSchoolByName(@RequestParam String name) {
+        School school = schoolService.getSchoolByName(name);
+        return school;
+    }
+
     @RequestMapping(value = "getSchoolByCreatedDate", method = RequestMethod.GET)
     public <List>School getSchoolByCreatedDate(@RequestParam String date) throws ParseException {
         School school =schoolService.getSchoolByCreatedDate(date);
         return school;
-
     }
     @RequestMapping(value = "getSchoolByUpdatedDate", method = RequestMethod.GET)
     public <List>School getSchoolByUpdatedDate(@RequestParam String date) throws ParseException {
         School school =schoolService.getSchoolByUpdatedDate(date);
         return school;
-
     }
+    @RequestMapping(value = "getSchoolByNumberOfStudents",method = RequestMethod.GET)
+    public List<School> getSchoolByNumberOfStudents(@RequestParam Integer numberOfStudents){
+        return schoolService.getSchoolByNumberOfStudents(numberOfStudents);
+    }
+
     @RequestMapping(value = "deletSchoolById", method = RequestMethod.POST)
     public void deletSchoolById(@RequestParam Integer id) throws ParseException {
         schoolService.deletSchoolById(id);
@@ -94,20 +87,18 @@ public class SchoolController {
     public void deletAllSchool() {
         schoolService.deletAllSchool();
     }
-
-
-
-    @RequestMapping(value = "deletSchoolByName", method = RequestMethod.POST)
-    public School deletSchoolByName(@RequestParam String SchoolName) {
-        School school = schoolService.deletSchoolByName(SchoolName);
-        return school;
-    }
     @RequestMapping(value = "DeleteAllSchoolsCreatedAfterDate", method = RequestMethod.GET)
     public <List> School DeleteAllSchoolsCreatedAfterDate(@RequestParam String date) throws ParseException {
         School school = schoolService.DeleteAllSchoolsCreatedAfterDate(date);
         return school;
 
     }
+    @RequestMapping(value = "deletSchoolByName", method = RequestMethod.POST)
+    public School deletSchoolByName(@RequestParam String SchoolName) {
+        School school = schoolService.deletSchoolByName(SchoolName);
+        return school;
+    }
+
 
     @RequestMapping(value = "DeleteSchoolsByCreatedDate", method = RequestMethod.POST)
     public <List>School DeleteSchoolsByCreatedDate(@RequestParam String date) throws ParseException {
@@ -121,10 +112,7 @@ public class SchoolController {
         return school;
 
     }
-    @RequestMapping(value = "getSchoolByNumberOfStudents",method = RequestMethod.GET)
-    public List<School> getSchoolByNumberOfStudents(@RequestParam Integer numberOfStudents){
-        return schoolService.getSchoolByNumberOfStudents(numberOfStudents);
-    }
+
     @RequestMapping(value = "createSchool", method = RequestMethod.POST)
     public String createSchool() {
         schoolService.createSchool();
